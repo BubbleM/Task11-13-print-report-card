@@ -1,0 +1,24 @@
+{
+  "name": "task11-print-report-card",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BubbleM/Task11-print-report-card.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BubbleM/Task11-print-report-card/issues"
+  },
+  "homepage": "https://github.com/BubbleM/Task11-print-report-card#readme",
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "cli-interact": "^0.1.9",
+    "mocha": "^3.5.0"
+  }
+}
