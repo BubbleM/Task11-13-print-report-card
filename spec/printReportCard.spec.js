@@ -21,9 +21,9 @@ function addClasses(clazzId, student) {
 }
 
 describe('测试描述', function () {
-  const str1 = 'Bubble,140102,1401,English:80,Math:21,Chinese:70,program:90';
-  const str2 = 'Nichole,140103,1401,English:90,Math:23,Chinese:90,program:29';
-  const str3 = 'liumin,140104,1401,English:20,Math:39,Chinese:56,program:38';
+  const str1 = 'Bubble,140102,1401,Math:21,Chinese:70,English:80,Program:90';
+  const str2 = 'Nichole,140103,1401,English:90,Math:23,Chinese:90,Program:29';
+  const str3 = 'liumin,140104,1401,English:20,Math:39,Chinese:56,Program:38';
   let student1 = addStudent(str1);
   let student2 = addStudent(str2);
   let student3 = addStudent(str3);
@@ -36,14 +36,16 @@ describe('测试描述', function () {
 
   it('print reportCard while student in the same class', function () {
     let result = printReportCard('140102', classes);
-    expect(result).to.be.equal(`Bubble所在1401班级成绩单
+
+    expect(result).to.be.equal(`学号为140102学生所在1401班级成绩单
 姓名|数学|语文|英语|编程|平均分|总分 
 ========================
 Bubble|21|70|80|90|65.25|261
 Nichole|23|90|90|29|58|232
-liumin|23|56|20|38|34.25|137
+liumin|39|56|20|38|38.25|153
 ========================
 全班总分平均数：210
 全班总分中位数：232`);
   });
+
 });
