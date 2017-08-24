@@ -19,6 +19,7 @@
   "devDependencies": {
     "chai": "^4.1.1",
     "cli-interact": "^0.1.9",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.0",
+    "sinon": "^3.2.1"
   }
 }
