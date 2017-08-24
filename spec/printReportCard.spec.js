@@ -1,6 +1,7 @@
 let expect = require('chai').expect;
-let sinon = require('sinon');
-let printReportCard = require('./printReportCard');
+let Clazz = require('../lib/Clazz');
+let printReportCard = require('../lib/printReportCard');
+let addStudent = require('../lib/addStudent');
 
 let classes = [];
 
@@ -19,26 +20,30 @@ function addClasses(clazzId, student) {
   }
 }
 
-
 describe('测试描述', function () {
-  const str1 = 'Bubble,140102,1401,English:80,Math:88';
-  const str2 = 'Bubble,140102,1401,English:80,Math:88';
-  const str1 = 'Bubble,140102,1401,English:80,Math:88';
-  const str2 = 'Bubble,140102,1401,English:80,Math:88';
+  const str1 = 'Bubble,140102,1401,English:80,Math:21,Chinese:70,program:90';
+  const str2 = 'Nichole,140103,1401,English:90,Math:23,Chinese:90,program:29';
+  const str3 = 'liumin,140104,1401,English:20,Math:39,Chinese:56,program:38';
   let student1 = addStudent(str1);
   let student2 = addStudent(str2);
   let student3 = addStudent(str3);
-  let student4 = addStudent(str4);
 
   before(() => {
     addClasses(student1.clazz, student1);
     addClasses(student2.clazz, student2);
     addClasses(student3.clazz, student3);
-    addClasses(student4.clazz, student4);
   });
 
-  it('return addStuInfo while user input the number 1', function () {
-
-    expect(main(1, 2)).to.be.equal('');
+  it('print reportCard while student in the same class', function () {
+    let result = printReportCard('140102', classes);
+    expect(result).to.be.equal(`Bubble所在1401班级成绩单
+姓名|数学|语文|英语|编程|平均分|总分 
+========================
+Bubble|21|70|80|90|65.25|261
+Nichole|23|90|90|29|58|232
+liumin|23|56|20|38|34.25|137
+========================
+全班总分平均数：210
+全班总分中位数：232`);
   });
 });
