@@ -34,7 +34,7 @@ describe('测试描述', function () {
     addClasses(student3.clazz, student3);
   });
 
-  it('print reportCard while student in the same class', function () {
+  it('print the Clazz reportCard while student in the same clazz', function () {
     let result = printClazzReportCard('140102', classes);
 
     expect(result).to.be.equal(`学号为140102学生所在1401班级成绩单

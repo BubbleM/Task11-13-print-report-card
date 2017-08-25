@@ -34,7 +34,7 @@ describe('测试描述', function () {
     addClasses(student3.clazz, student3);
   });
 
-  it('print reportCard while student is not in the same class', function () {
+  it('print reportCard with all the student', function () {
     let result = printReportCard('140102,140203', classes);
     expect(result).to.be.equal(`成绩单
 姓名|数学|语文|英语|编程|平均分|总分 
