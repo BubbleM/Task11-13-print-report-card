@@ -1,0 +1,21 @@
+.dark-primary-color    { background: #388E3C; }
+.default-primary-color { background: #4CAF50; }
+.light-primary-color   { background: #C8E6C9; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FFC107; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
+
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;  /*让中间内容更柔和*/
+}
+
+* {
+    box-sizing: border-box;  /*添加padding或border时元素的布局不会变大*/
+}
+
+a {
+    text-decoration: none;
+}
