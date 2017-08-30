@@ -13,12 +13,73 @@
   <script src="src/js/bootstrap.js"></script>
 </head>
 <body class="container-fluid">
-  <div class="row dark-primary-color header">
-    <span class="primary-text-color">欢迎使用学生成绩Web版</span>
+  <div class="row default-primary-color header">
+    <span class="primary-text-color right-text">欢迎，XXX</span>
+    <span class="primary-text-color left-text">学生成绩Web版</span>
   </div>
   <div class="row content">
-    <div class="col-lg-4">1</div>
-    <div class="col-lg-8">2</div>
+    <div class="col-lg-2 list-group">
+      <a href="" class="list-group-item">&nbsp;</a>
+      <a href="#" style="text-align:center;" class="list-group-item list-group-item-info">
+       <span class="glyphicon glyphicon-cog"></span>系统管理
+      </a>
+      <a href="#" class="list-group-item">学生查询</a>
+      <a href="#" class="list-group-item">添加学生</a>
+      <a href="#" class="list-group-item">修改信息</a>
+      <a href="#" class="list-group-item">删除学生</a>
+    </div>
+    <div class="col-lg-10">
+      <div class="row nav_wrapper secondary-text-color">系统管理 > 用户管理 > 用户查询</div>
+      <div class="row light-primary-color form_wrapper">
+        <form class="form-inline">
+          <div class="form-group">
+            <label>条件：</label>
+            <select class="form-control">
+              <option>请选择</option>
+              <option>班级成绩</option>
+              <option>学校成绩</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入查询条件">
+          </div>
+          <button type="submit" class="btn btn-danger">查询</button>
+          <button type="button" class="btn btn-success">添加学生</button>
+        </form>
+      </div>
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>姓名</th>
+                <th>学号</th>
+                <th>班级</th>
+                <th>数学</th>
+                <th>语文</th>
+                <th>英语</th>
+                <th>编程</th>
+                <th>平均分</th>
+                <th>总分</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>BubbleM</td>
+                <td>140102</td>
+                <td>1401</td>
+                <td>21</td>
+                <td>70</td>
+                <td>80</td>
+                <td>90</td>
+                <td>80</td>
+                <td>90</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
   <footer class="light-primary-color row">
     <span>@2017-2019 BubbleM 学生成绩Web版</span>

@@ -6,12 +6,18 @@ body {
   height: 50px;
   text-align: center;
 }
-.header span{
+.header span {
   display: block;
   line-height: 50px;
   font-size: 16px;
-  float: right;
   margin-right: 10px;
+}
+.right-text {
+  float: right;
+}
+.left-text {
+  float: left;
+  margin-left: 5px;
 }
 
 .content {
@@ -20,7 +26,18 @@ body {
   height:auto;
   top: 50px;
   bottom: 60px;
-  background: red;
+}
+
+.nav_wrapper {
+  height: 50px;
+  text-align: left;
+  line-height: 50px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.form_wrapper {
+  padding: 5px;
 }
 
 footer{
