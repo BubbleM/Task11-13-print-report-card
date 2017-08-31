@@ -1,4 +1,4 @@
-require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu'], function (addStudent, findStu, deleteStu){
+require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '../../lib/modifyStu'], function (addStudent, findStu, deleteStu, modifyStu){
   let EventUtil = {
     addHandler: function (element, type, handler) {
       if (element.addEventListener) {
@@ -55,7 +55,6 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu'], fu
   }
   EventUtil.addHandler(searchBtn, 'click', searchFun);
 
-
   /*删除学生信息事件*/
   let tbodyNode = document.getElementsByTagName('tbody')[0];
   let handleFun = function (e) {
@@ -65,7 +64,24 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu'], fu
       let result = deleteStu.deleteStu(ele.parentNode.parentNode.id);
       if (result) tbodyNode.removeChild(ele.parentNode.parentNode);
     }
+    if (ele.className === 'modify') {
+      modifyStu.modifyStu(ele.parentNode.parentNode.id);
+    }
   };
   EventUtil.addHandler(tbodyNode, 'click', handleFun);
 
+  /*修改学生信息*/
+  let modifyFun = function () {
+    alert('ha')
+    // let str = `${this.name.value},${this.ids.value},${this.clazzId.value},Math:${this.math.value},Chinese:${this.chinese.value},English:${this.english.value},Program:${this.progress.value}`;
+    // getStuInfo(str);
+  }
+
+  let confirmModifyBtn = document.getElementById('confirmModify');
+  let modifyBtn = document.getElementById('modifyBtn');
+  let submitFun = function () {
+    let form = document.getElementsByName('modifyStuForm')[0];
+    EventUtil.addHandler(form, 'submit', modifyFun);
+  }
+  EventUtil.addHandler(confirmModifyBtn, 'click', submitFun);
 });

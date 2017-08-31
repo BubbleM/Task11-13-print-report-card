@@ -13,6 +13,23 @@
   <script src="src/js/bootstrap.js"></script>
 </head>
 <body class="container-fluid">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">修改学生信息</h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="confirmModify">确认修改</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row default-primary-color header">
     <span class="primary-text-color right-text">欢迎，XXX</span>
     <span class="primary-text-color left-text">学生成绩Web版</span>
