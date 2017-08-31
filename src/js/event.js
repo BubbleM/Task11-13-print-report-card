@@ -35,15 +35,18 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
     let pattern = /[\w]+,[\d]{6,},[\d]{4},([\w]{2,18}:[\d]{2,3},)+/;
     if (pattern.test(stuInfo)) {
       addStudent.addStudent(stuInfo);
+      return true;
     } else {
       alert('格式不正确，请重新输入');
     }
   }
+  let addStuForm = document.getElementsByName('addStuForm')[0];
   let addStuSubmit = function () {
     let str = `${this.name.value},${this.ids.value},${this.clazzId.value},Math:${this.math.value},Chinese:${this.chinese.value},English:${this.english.value},Program:${this.progress.value}`;
-    getStuInfo(str);
+    if (getStuInfo(str)) alert('添加成功!');
+    addStuForm.style.display = 'none';
+    document.getElementById('defaultTable').style.display = 'block';
   }
-  let addStuForm = document.getElementsByName('addStuForm')[0];
   EventUtil.addHandler(addStuForm, 'submit', addStuSubmit);
 
   /*查询事件*/
@@ -71,17 +74,14 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
   EventUtil.addHandler(tbodyNode, 'click', handleFun);
 
   /*修改学生信息*/
-  let modifyFun = function () {
-    alert('ha')
-    // let str = `${this.name.value},${this.ids.value},${this.clazzId.value},Math:${this.math.value},Chinese:${this.chinese.value},English:${this.english.value},Program:${this.progress.value}`;
-    // getStuInfo(str);
-  }
-
   let confirmModifyBtn = document.getElementById('confirmModify');
-  let modifyBtn = document.getElementById('modifyBtn');
   let submitFun = function () {
-    let form = document.getElementsByName('modifyStuForm')[0];
-    EventUtil.addHandler(form, 'submit', modifyFun);
+    let formNode = this.parentNode.parentNode.children[1].children[0];
+    let str = `${formNode.names.value},${formNode.ides.value},${formNode.clazzIds.value},Math:${formNode.maths.value},Chinese:${formNode.chinese1.value},English:${formNode.english1.value},Program:${formNode.progress1.value}`;
+    if(getStuInfo(str)){
+      confirmModifyBtn.setAttribute('data-dismiss', 'modal');
+      alert('修改成功');
+    }
   }
   EventUtil.addHandler(confirmModifyBtn, 'click', submitFun);
 });
