@@ -1,4 +1,9 @@
 require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '../../lib/modifyStu'], function (addStudent, findStu, deleteStu, modifyStu){
+  Messenger.options = {
+    extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
+    theme: 'future'
+  }
+
   let EventUtil = {
     addHandler: function (element, type, handler) {
       if (element.addEventListener) {
@@ -37,15 +42,25 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
       addStudent.addStudent(stuInfo);
       return true;
     } else {
-      alert('格式不正确，请重新输入');
+      Messenger().post({
+        message: '格式不正确，请重新输入',
+        type: 'error',
+        showCloseButton: true
+      });
     }
   }
   let addStuForm = document.getElementsByName('addStuForm')[0];
   let addStuSubmit = function () {
     let str = `${this.name.value},${this.ids.value},${this.clazzId.value},Math:${this.math.value},Chinese:${this.chinese.value},English:${this.english.value},Program:${this.progress.value}`;
-    if (getStuInfo(str)) alert('添加成功!');
-    addStuForm.style.display = 'none';
-    document.getElementById('defaultTable').style.display = 'block';
+    if (getStuInfo(str)){
+      Messenger().post({
+        message: `成功添加学生${this.name.value}的信息!`,
+        type: 'info',
+        showCloseButton: true
+      });
+      addStuForm.style.display = 'none';
+      document.getElementById('defaultTable').style.display = 'block';
+    }
   }
   EventUtil.addHandler(addStuForm, 'submit', addStuSubmit);
 
@@ -80,7 +95,11 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
     let str = `${formNode.names.value},${formNode.ides.value},${formNode.clazzIds.value},Math:${formNode.maths.value},Chinese:${formNode.chinese1.value},English:${formNode.english1.value},Program:${formNode.progress1.value}`;
     if(getStuInfo(str)){
       confirmModifyBtn.setAttribute('data-dismiss', 'modal');
-      alert('修改成功');
+      Messenger().post({
+        message: `成功学生${formNode.names.value}修改信息!`,
+        type: 'info',
+        showCloseButton: true
+      });
     }
   }
   EventUtil.addHandler(confirmModifyBtn, 'click', submitFun);
