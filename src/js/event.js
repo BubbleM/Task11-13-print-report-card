@@ -26,20 +26,19 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
   };
 
   /*点击添加按钮事件*/
-  let addStuFun = function () {
+  let showAddForm = function () {
     let addStuForm1 = document.getElementById('addStuForm');
     let defaultTable1 = document.getElementById('defaultTable');
     defaultTable1.style.display = 'none';
     addStuForm1.style.display = 'block';
   }
   let addStu = document.getElementById('addStu');
-  EventUtil.addHandler(addStu, 'click', addStuFun);
+  EventUtil.addHandler(addStu, 'click', showAddForm);
 
   /*添加学生信息 提交表单事件*/
-  function getStuInfo(stuInfo) {
+  function checkAddStuInfo(stuInfo) {
     let pattern = /[\w]+,[\d]{6,},[\d]{4},([\w]{2,18}:[\d]{2,3},)+/;
     if (pattern.test(stuInfo)) {
-      addStudent.addStudent(stuInfo);
       return true;
     } else {
       Messenger().post({
@@ -50,9 +49,10 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
     }
   }
   let addStuForm = document.getElementsByName('addStuForm')[0];
-  let addStuSubmit = function () {
+  let submitAddStuForm = function () {
     let str = `${this.name.value},${this.ids.value},${this.clazzId.value},Math:${this.math.value},Chinese:${this.chinese.value},English:${this.english.value},Program:${this.progress.value}`;
-    if (getStuInfo(str)){
+    if (checkAddStuInfo(str)){
+      addStudent.addStudent(str);
       Messenger().post({
         message: `成功添加学生${this.name.value}的信息!`,
         type: 'info',
@@ -62,13 +62,13 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
       document.getElementById('defaultTable').style.display = 'block';
     }
   }
-  EventUtil.addHandler(addStuForm, 'submit', addStuSubmit);
+  EventUtil.addHandler(addStuForm, 'submit', submitAddStuForm);
 
   /*查询事件*/
-  function getStuId(stuId) {
+  function checkStuId(stuId) {
     let pattern = /([\d]{6,})+/;
     if (pattern.test(stuId)) {
-      findStu.findStu(stuId);
+      return true;
     } else {
       Messenger().post({
         message: '格式不正确，请重新输入',
@@ -79,12 +79,14 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
   }
 
   let searchBtn = document.getElementById('searchBtn');
-  let searchFun = function () {
+  let searchStuInfo = function () {
     let searchIds = document.getElementById('searchId');
-    getStuId(searchIds.value);
-    searchIds.value = '';
+    if(checkStuId(searchIds.value)) {
+      findStu.findStu(searchIds.value);
+      searchIds.value = '';
+    };
   }
-  EventUtil.addHandler(searchBtn, 'click', searchFun);
+  EventUtil.addHandler(searchBtn, 'click', searchStuInfo);
 
   /*删除学生信息事件*/
   let tbodyNode = document.getElementsByTagName('tbody')[0];
@@ -103,10 +105,11 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
 
   /*修改学生信息*/
   let confirmModifyBtn = document.getElementById('confirmModify');
-  let submitFun = function () {
+  let modifyStuForm = function () {
     let formNode = this.parentNode.parentNode.children[1].children[0];
     let str = `${formNode.names.value},${formNode.ides.value},${formNode.clazzIds.value},Math:${formNode.maths.value},Chinese:${formNode.chinese1.value},English:${formNode.english1.value},Program:${formNode.progress1.value}`;
-    if(getStuInfo(str)){
+    if(checkAddStuInfo(str)){
+      addStudent.addStudent(str);
       confirmModifyBtn.setAttribute('data-dismiss', 'modal');
       Messenger().post({
         message: `成功学生${formNode.names.value}修改信息!`,
@@ -115,8 +118,7 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
       });
     }
   }
-  EventUtil.addHandler(confirmModifyBtn, 'click', submitFun);
-
+  EventUtil.addHandler(confirmModifyBtn, 'click', modifyStuForm);
 
   /*总评成绩*/
   let averageScoreNode = document.getElementById('averageScore');
