@@ -90,12 +90,29 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
 
   /*删除学生信息事件*/
   let tbodyNode = document.getElementsByTagName('tbody')[0];
+  let confirmDeleteBtn = document.getElementById('confirmDelete');
+  let deleteModalNode = document.getElementById('deleteModal');
+  let deleteFun = function (node, id) {
+    confirmDeleteBtn.setAttribute('data-dismiss', 'modal');
+    localStorage.removeItem(id);
+    Messenger().post({
+      message: `学号为${id}的学生已经删除!`,
+      type: 'info',
+      showCloseButton: true
+    });
+    setTimeout(function () {
+      tbodyNode.removeChild(node);
+    }, 2000);
+  }
+  EventUtil.addHandler(confirmDeleteBtn, 'click', deleteFun);
+
   let handleFun = function (e) {
     e = window.event ? window.event : e;
     let ele = e.target ? e.target : e.srcElement;
     if (ele.className === 'remove') {
       let result = deleteStu.deleteStu(ele.parentNode.parentNode.id);
-      if (result) tbodyNode.removeChild(ele.parentNode.parentNode);
+      deleteModalNode.innerText = result.msg;
+      deleteFun(ele.parentNode.parentNode, result.id);
     }
     if (ele.className === 'modify') {
       modifyStu.modifyStu(ele.parentNode.parentNode.id);
