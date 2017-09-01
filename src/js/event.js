@@ -1,4 +1,4 @@
-require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '../../lib/modifyStu'], function (addStudent, findStu, deleteStu, modifyStu){
+require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '../../lib/modifyStu', '../../lib/calculateStu'], function (addStudent, findStu, deleteStu, modifyStu,calculateStu){
   Messenger.options = {
     extraClasses: 'messenger-fixed messenger-on-bottom messenger-on-right',
     theme: 'future'
@@ -65,10 +65,23 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
   EventUtil.addHandler(addStuForm, 'submit', addStuSubmit);
 
   /*查询事件*/
+  function getStuId(stuId) {
+    let pattern = /([\d]{6,})+/;
+    if (pattern.test(stuId)) {
+      findStu.findStu(stuId);
+    } else {
+      Messenger().post({
+        message: '格式不正确，请重新输入',
+        type: 'error',
+        showCloseButton: true
+      });
+    }
+  }
+
   let searchBtn = document.getElementById('searchBtn');
   let searchFun = function () {
     let searchIds = document.getElementById('searchId');
-    findStu.findStu(searchIds.value);
+    getStuId(searchIds.value);
     searchIds.value = '';
   }
   EventUtil.addHandler(searchBtn, 'click', searchFun);
@@ -103,4 +116,12 @@ require(['../../lib/addStudent', '../../lib/findStu', '../../lib/deleteStu', '..
     }
   }
   EventUtil.addHandler(confirmModifyBtn, 'click', submitFun);
+
+
+  /*总评成绩*/
+  let averageScoreNode = document.getElementById('averageScore');
+  let mediaScoreNode = document.getElementById('mediaScore');
+  let scores = calculateStu.calculateStu();
+  averageScoreNode.innerText = scores.averageScore + '分';
+  mediaScoreNode.innerText = scores.mediaScore + '分';
 });
